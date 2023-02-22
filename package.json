@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/mathias-grdl/P6-PIIQUANTE/issues"
   },
-  "homepage": "https://github.com/mathias-grdl/P6-PIIQUANTE#readme"
+  "homepage": "https://github.com/mathias-grdl/P6-PIIQUANTE#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
