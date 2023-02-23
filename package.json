@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/mathias-grdl/P6-PIIQUANTE#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongoose": "^6.10.0"
   }
 }
