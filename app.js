@@ -3,6 +3,13 @@ const mongoose = require('mongoose');
 
 // mongodb+srv://mathiasteddy:<password>@cluster0.uze0as9.mongodb.net/?retryWrites=true&w=majority
 
+const stuffRoutes = require('./routes/stuff');
+
+
+// importation de la routes user
+const userRoutes = require('./routes/user');
+// FIN importation de la routes user
+
 mongoose.connect('mongodb+srv://mathiasteddy:bozptpnGdmEixPHx@cluster0.uze0as9.mongodb.net/?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
@@ -11,46 +18,16 @@ mongoose.connect('mongodb+srv://mathiasteddy:bozptpnGdmEixPHx@cluster0.uze0as9.m
 
 
 const app = express();
-
+ 
 // intercepte les requetes avec du json
 app.use(express.json());
 
-// middleware : https://openclassrooms.com/fr/courses/6390246-passez-au-full-stack-avec-node-js-express-et-mongodb/6466298-creez-une-route-get
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    next();
-  });
+app.use('/api/stuff', stuffRoutes);
 
-app.post('/api/stuff', (req, res, next) => {
-console.log(req.body);
-res.status(201).json({
-    message : 'Objet créé'
-});
-});
 
-// middleware 
-app.get('/api/stuff', (req, res, next) => {
-    const stuff = [
-      {
-        _id: 'oeihfzeoi',
-        title: 'Mon premier objet',
-        description: 'Les infos de mon premier objet',
-        imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-        price: 4900,
-        userId: 'qsomihvqios',
-      },
-      {
-        _id: 'oeihfzeomoihi',
-        title: 'Mon deuxième objet',
-        description: 'Les infos de mon deuxième objet',
-        imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-        price: 2900,
-        userId: 'qsomihvqios',
-      },
-    ];
-    res.status(200).json(stuff);
-  });
+app.use('/api/stuff', stuffRoutes);
+//Enregistrer les routes utilisateurs
+app.use('/api/auth/signup', userRoutes);
+//fin utilisateurs
 
 module.exports = app;
