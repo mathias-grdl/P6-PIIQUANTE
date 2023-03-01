@@ -24,8 +24,6 @@ app.use(express.json());
 
 app.use('/api/stuff', stuffRoutes);
 
-
-app.use('/api/stuff', stuffRoutes);
 //Enregistrer les routes utilisateurs
 app.use('/api/auth/signup', userRoutes);
 //fin utilisateurs
