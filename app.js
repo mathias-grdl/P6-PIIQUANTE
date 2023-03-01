@@ -5,15 +5,21 @@ const mongoose = require('mongoose');
 
 const stuffRoutes = require('./routes/stuff');
 
-
 // importation de la routes user
 const userRoutes = require('./routes/user');
 // FIN importation de la routes user
 
-mongoose.connect('mongodb+srv://mathiasteddy:bozptpnGdmEixPHx@cluster0.uze0as9.mongodb.net/?retryWrites=true&w=majority',
-  { useNewUrlParser: true,
+const dotenv = require("dotenv").config();
+
+const DB_USERNAME = process.env.DB_USERNAME;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_CLUSTER = process.env.DB_CLUSTER; 
+
+mongoose.connect("mongodb+srv://" + DB_USERNAME + ":" + DB_PASSWORD + "@" + DB_CLUSTER + ".mongodb.net/?retryWrites=true&w=majority",
+
+{ useNewUrlParser: true,
     useUnifiedTopology: true })
-  .then(() => console.log('Connexion à MongoDB réussie !'))
+  .then(() => console.log('Connexion à MongoDB réussie !')) 
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 

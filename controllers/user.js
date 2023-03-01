@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
+const TOKEN_KEY = process.env.TOKEN_KEY; 
+
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
       .then(hash => {
@@ -29,7 +31,7 @@ exports.login = (req, res, next) => {
                    }
                    res.status(200).json({
                        userId: user._id,
-                       token: 'TOKEN'
+                       token: TOKEN_KEY
                    });
                })
                .catch(error => res.status(500).json({ error }));
