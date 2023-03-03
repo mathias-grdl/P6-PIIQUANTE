@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 // mongodb+srv://mathiasteddy:<password>@cluster0.uze0as9.mongodb.net/?retryWrites=true&w=majority
 
-const stuffRoutes = require('./routes/stuff');
+// const stuffRoutes = require('./routes/stuff');
 
 // importation de la routes user
 const userRoutes = require('./routes/user');
@@ -28,10 +28,19 @@ const app = express();
 // intercepte les requetes avec du json
 app.use(express.json());
 
-app.use('/api/stuff', stuffRoutes);
+
+// Pour éviter les erreurs de CORS 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+  next();
+});
+
+// app.use('/api/stuff', stuffRoutes);
 
 //Enregistrer les routes utilisateurs
-app.use('/api/auth/signup', userRoutes);
+app.use('/api/auth', userRoutes);
 //fin utilisateurs
 
 module.exports = app;
