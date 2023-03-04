@@ -1,13 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-// mongodb+srv://mathiasteddy:<password>@cluster0.uze0as9.mongodb.net/?retryWrites=true&w=majority
-
-// const stuffRoutes = require('./routes/stuff');
-
 // importation de la routes user
 const userRoutes = require('./routes/user');
-// FIN importation de la routes user
+const stuffRoutes = require('./routes/sauce');
+const path = require('path');
 
 const dotenv = require("dotenv").config();
 
@@ -35,12 +32,13 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
   next();
-});
+}); 
 
-// app.use('/api/stuff', stuffRoutes);
+
 
 //Enregistrer les routes utilisateurs
 app.use('/api/auth', userRoutes);
-//fin utilisateurs
+app.use('/api/sauces', stuffRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;
