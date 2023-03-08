@@ -1,30 +1,27 @@
+// require librairies 
 const express = require('express');
 const mongoose = require('mongoose');
-
-// importation de la routes user
-const userRoutes = require('./routes/user');
-const stuffRoutes = require('./routes/sauce');
+const dotenv = require("dotenv");
 const path = require('path');
 
-const dotenv = require("dotenv").config();
+// importation des route
+const userRoutes = require('./routes/user');
+const sauceRoutes = require('./routes/sauce');
 
-const DB_USERNAME = process.env.DB_USERNAME;
-const DB_PASSWORD = process.env.DB_PASSWORD;
-const DB_CLUSTER = process.env.DB_CLUSTER; 
+dotenv.config();
+const app = express();
 
-mongoose.connect("mongodb+srv://" + DB_USERNAME + ":" + DB_PASSWORD + "@" + DB_CLUSTER + ".mongodb.net/?retryWrites=true&w=majority",
-
-{ useNewUrlParser: true,
-    useUnifiedTopology: true })
-  .then(() => console.log('Connexion à MongoDB réussie !')) 
+//connexion à la base de données 
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}/?retryWrites=true&w=majority`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-
-const app = express();
- 
 // intercepte les requetes avec du json
 app.use(express.json());
-
 
 // Pour éviter les erreurs de CORS 
 app.use((req, res, next) => {
@@ -32,13 +29,11 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
   next();
-}); 
-
-
+});
 
 //Enregistrer les routes utilisateurs
 app.use('/api/auth', userRoutes);
-app.use('/api/sauces', stuffRoutes);
+app.use('/api/sauces', sauceRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;
