@@ -1,27 +1,5 @@
 const Sauce = require('../models/sauce');
 const fs = require('fs');
-// exports.createSauce = (req, res, next) => {
-//   const sauce = new Sauce({
-//     title: req.body.title,
-//     description: req.body.description,
-//     imageUrl: req.body.imageUrl,
-//     price: req.body.price,
-//     userId: req.body.userId
-//   });
-//   sauce.save().then(
-//     () => {
-//       res.status(201).json({ 
-//         message: 'Post saved successfully!'
-//       });
-//     }
-//   ).catch(
-//     (error) => {
-//       res.status(400).json({
-//         error: error
-//       });
-//     }
-//   );
-// };
 
 exports.create = (req, res, next) => {
   const sauceObject = JSON.parse(req.body.sauce);
@@ -54,30 +32,6 @@ exports.getOne = (req, res, next) => {
   );
 };
 
-// exports.modifySauce = (req, res, next) => {
-//   const sauce = new Sauce({
-//     _id: req.params.id,
-//     title: req.body.title,
-//     description: req.body.description,
-//     imageUrl: req.body.imageUrl,
-//     price: req.body.price,
-//     userId: req.body.userId
-//   });
-//   Sauce.updateOne({_id: req.params.id}, sauce).then(
-//     () => {
-//       res.status(201).json({
-//         message: 'Sauce updated successfully!'
-//       });
-//     }
-//   ).catch(
-//     (error) => {
-//       res.status(400).json({
-//         error: error
-//       });
-//     }
-//   );
-// };
-
 exports.modify = (req, res, next) => {
   const sauceObject = req.file ? {
     ...JSON.parse(req.body.sauce),
@@ -99,22 +53,6 @@ exports.modify = (req, res, next) => {
       res.status(400).json({ error });
     });
 };
-
-// exports.deleteSauce = (req, res, next) => {
-//   Sauce.deleteOne({_id: req.params.id}).then(
-//     () => {
-//       res.status(200).json({
-//         message: 'Deleted!'
-//       });
-//     }
-//   ).catch(
-//     (error) => {
-//       res.status(400).json({
-//         error: error
-//       });
-//     }
-//   );
-// };
 
 exports.delete = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id })
