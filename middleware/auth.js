@@ -1,4 +1,4 @@
-// V&rification de la validité du token
+// Importation du module 'jsonwebtoken'
 const jwt = require('jsonwebtoken');
  
 const dotenv = require("dotenv").config();
