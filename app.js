@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const dotenv = require("dotenv");
 const path = require('path');
 
-// importation des route
+// importation des routes
 const userRoutes = require('./routes/user');
 const sauceRoutes = require('./routes/sauce');
 
