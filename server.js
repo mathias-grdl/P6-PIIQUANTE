@@ -3,7 +3,7 @@ const http = require('http');
 // Importation de app.js
 const app = require('./app');
 
-// Renvoie un port valide
+// Normaliser le numéro de port utilisé
 const normalizePort = val => {
     const port = parseInt(val, 10);
   
@@ -39,8 +39,8 @@ const normalizePort = val => {
         throw error;
     }
   };
-  
 
+  // crée un serveur HTTP et l'écoute sur un port spécifié
   const server = http.createServer(app);
   
   server.on('error', errorHandler);

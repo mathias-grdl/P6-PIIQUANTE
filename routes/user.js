@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
+// Importation du controller "user" 
 const userCtrl = require('../controllers/user');
 
-// creation de 2 routes
+// création de 2 routes
 router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
 

@@ -32,7 +32,7 @@ app.use((req, res, next) => {
   next();
 });
 
-//Intéraction avec la bdd
+//Enregistrement des routes
 app.use('/api/auth', userRoutes);
 app.use('/api/sauces', sauceRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
