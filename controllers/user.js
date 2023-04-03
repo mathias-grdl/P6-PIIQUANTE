@@ -1,3 +1,4 @@
+
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const jwt = require('jsonwebtoken');
@@ -5,6 +6,8 @@ const jwt = require('jsonwebtoken');
 const dotenv = require("dotenv").config();
 const tokenKey = process.env.tokenKey; 
 
+
+// Exporte la fonction signup qui permet de créer un nouvel utilisateur dans la base de données.
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
       .then(hash => {
@@ -19,7 +22,7 @@ exports.signup = (req, res, next) => {
       .catch(error => res.status(500).json({ error }));
   };
 
-
+// Exporte la fonction login qui permet à un utilisateur existant de s'authentifier.
   exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then(user => {

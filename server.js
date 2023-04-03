@@ -1,7 +1,9 @@
+// Importation du module http
 const http = require('http');
-// importation de app.js
+// Importation de app.js
 const app = require('./app');
 
+// Renvoie un port valide
 const normalizePort = val => {
     const port = parseInt(val, 10);
   
@@ -13,9 +15,11 @@ const normalizePort = val => {
     }
     return false;
   };
+
   const port = normalizePort(process.env.PORT || '3000');
   app.set('port', port);
   
+  // Recherche les différentes erreurs et les gère de manière appropriée.
   const errorHandler = error => {
     if (error.syscall !== 'listen') {
       throw error;
@@ -36,6 +40,7 @@ const normalizePort = val => {
     }
   };
   
+
   const server = http.createServer(app);
   
   server.on('error', errorHandler);
@@ -47,4 +52,3 @@ const normalizePort = val => {
   
   server.listen(port);
   
-//   pour avant, revoir : https://openclassrooms.com/fr/courses/6390246-passez-au-full-stack-avec-node-js-express-et-mongodb/6466277-creez-une-application-express

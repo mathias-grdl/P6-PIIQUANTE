@@ -17,6 +17,7 @@ exports.create = (req, res, next) => {
     .catch(error => { res.status(400).json({ error }) })
 };
 
+// Séléctionner une sauce
 exports.getOne = (req, res, next) => {
   Sauce.findOne({
     _id: req.params.id
@@ -76,6 +77,7 @@ exports.delete = (req, res, next) => {
     });
 };
 
+// Toutes les sauces
 exports.getAll = (req, res, next) => {
   Sauce.find().then(
     (sauces) => {
@@ -90,6 +92,7 @@ exports.getAll = (req, res, next) => {
   );
 };
 
+// Like/Dislike d'une sauce
 exports.like = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id }) // Recherche de la sauce correspondante à l'id dans la base de données
     .then((sauce) => { // Si la sauce est trouvée, exécuter la fonction suivante

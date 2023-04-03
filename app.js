@@ -24,6 +24,7 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS
 app.use(express.json());
 
 // Pour éviter les erreurs de CORS 
+// Empêche les requêtes malveillantes d'accéder à des ressources sensibles
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization");
@@ -31,9 +32,10 @@ app.use((req, res, next) => {
   next();
 });
 
-//Enregistrer les routes utilisateurs
+//Intéraction avec la bdd
 app.use('/api/auth', userRoutes);
 app.use('/api/sauces', sauceRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
+// Exportation de app
 module.exports = app;
