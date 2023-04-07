@@ -9,7 +9,8 @@ const tokenKey = process.env.tokenKey;
 
 // Exporte la fonction signup qui permet de créer un nouvel utilisateur dans la base de données.
 exports.signup = (req, res, next) => {
-  const passwordRegex = new RegExp(/^\w(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/);
+  const passwordRegex = new RegExp(/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/);
+
   if (!passwordRegex.test(req.body.password)) {
     res.status(400).json({
       error: "le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre, un caractère spécial et d'une longueur d'au moins 8 caractères",
